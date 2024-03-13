@@ -1,0 +1,23 @@
+name: Build and Deploy Sring app
+
+on: push
+
+jobs:
+  build-deploy:
+    name: Build and Deploy Srping boot for beginner
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup JDK 17
+        uses: actions/setup-java@v4
+        with:
+          destribution: 'corretto'
+          java-version: 17
+
+      - name: Unit Test
+        run: mvn -B test --file pom.xml
+
+      - name: Build application
+        run: mvn clean install
